@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Classe de repàs de 60 minuts amb un qüestionari interactiu de diagnosi de PC gamer per a 2n d’FP Bàsica.">
+  <title>Classe 11 · Kahoot de diagnosi de PC gamer · 2n FP Bàsica</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #f8fafc; background: #0f172a; }
+    * { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.55; }
+    a { color: #7dd3fc; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; background: #16213b; border-bottom: 1px solid #334155; padding: .8rem max(1rem, calc((100vw - 1100px) / 2)); }
+    .topbar a { font-weight: 700; text-decoration: none; }
+    main { width: min(100% - 2rem, 1100px); margin: 2rem auto 4rem; }
+    h1, h2, h3 { line-height: 1.25; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); margin: .5rem 0; }
+    h2 { margin-top: 0; }
+    .eyebrow { color: #fbbf24; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .lead { font-size: 1.15rem; max-width: 70ch; color: #dbeafe; }
+    .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.2rem 0; }
+    .chips span { border: 1px solid #475569; border-radius: 999px; padding: .3rem .7rem; font-size: .9rem; }
+    .actions { display: flex; gap: .7rem; flex-wrap: wrap; margin: 1.3rem 0; }
+    .button { display: inline-block; background: #38bdf8; color: #082f49; border: 0; border-radius: 10px; padding: .8rem 1.1rem; font: inherit; font-weight: 800; text-decoration: none; cursor: pointer; }
+    .button.secondary { color: #f8fafc; background: #334155; }
+    .card { background: #1e293b; border: 1px solid #3f5069; border-radius: 16px; padding: clamp(1rem, 3vw, 1.8rem); margin: 1.2rem 0; }
+    .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+    .cols .card { margin: 0; }
+    ul, ol { padding-left: 1.3rem; }
+    li { margin: .4rem 0; }
+    .data { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .data th, .data td { padding: .5rem .7rem; border-bottom: 1px solid #475569; text-align: left; }
+    .data th { color: #bfdbfe; }
+    .note { border-left: 4px solid #fbbf24; padding-left: 1rem; color: #e2e8f0; }
+    .game { border-color: #38bdf8; }
+    .game-head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-weight: 800; }
+    .timer { color: #fbbf24; }
+    progress { width: 100%; height: 12px; accent-color: #38bdf8; margin: 1rem 0; }
+    .answers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; margin: 1.4rem 0; }
+    .answer { min-height: 88px; padding: 1rem; border: 0; border-radius: 12px; color: white; font: inherit; font-weight: 750; text-align: left; cursor: pointer; }
+    .answer:nth-child(1) { background: #be123c; }
+    .answer:nth-child(2) { background: #1d4ed8; }
+    .answer:nth-child(3) { background: #a16207; }
+    .answer:nth-child(4) { background: #15803d; }
+    .answer:hover:not(:disabled) { filter: brightness(1.2); }
+    .answer:disabled { opacity: .7; cursor: default; }
+    .answer.correct { outline: 4px solid #bbf7d0; opacity: 1; }
+    .answer.wrong { outline: 4px solid #fecaca; }
+    .feedback { min-height: 4rem; font-weight: 700; }
+    .muted { color: #cbd5e1; }
+    details { margin-top: 1rem; }
+    summary { cursor: pointer; font-weight: 800; }
+    footer { text-align: center; padding: 2rem 1rem; color: #cbd5e1; }
+    [hidden] { display: none !important; }
+    @media (max-width: 650px) { .cols, .answers { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav class="topbar" aria-label="Navegació de la classe"><a href="../index.html">← Tornar al joc públic</a></nav>
+  <main>
+    <header>
+      <p class="eyebrow">1r trimestre · Classe 11 · 60 minuts</p>
+      <h1>Repte de diagnosi de PC gamer</h1>
+      <p class="lead">Resolem una avaria amb dades i càlculs breus. Després juguem un qüestionari de 17 preguntes i expliquem els errors que ens ajudin a millorar.</p>
+      <div class="chips"><span>Ciències Aplicades II</span><span>Potència i temperatura</span><span>Percentatges i pressupostos</span></div>
+      <div class="actions">
+        <a class="button secondary" href="../index.html" target="_blank" rel="noopener noreferrer">Obrir només el joc ↗</a>
+      </div>
+    </header>
+
+    <section class="cols" aria-label="Objectius i organització">
+      <div class="card">
+        <h2>Objectius</h2>
+        <ul>
+          <li>Sumar la potència dels components i comprovar si la font és suficient.</li>
+          <li>Calcular el salt tèrmic i interpretar una prova de refrigeració.</li>
+          <li>Aplicar marge, descompte i IVA en un pressupost de taller.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Planificació i material</h2>
+        <ol>
+          <li>Recuperació i dades del cas: 8 min.</li>
+          <li>Exemple guiat: 7 min.</li>
+          <li>Joc i comentari de respostes: 30 min.</li>
+          <li>Revisió de dos errors: 10 min.</li>
+          <li>Tiquet de sortida: 5 min.</li>
+        </ol>
+        <p>Calen un dispositiu amb navegador, paper i llapis. Es pot fer servir calculadora per comprovar els resultats.</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="cas-title">
+      <h2 id="cas-title">El cas del taller</h2>
+      <p>Un PC s’apaga quan executa un joc. Aquestes són <strong>dades simulades per a l’activitat</strong>, no mesures d’un equip real.</p>
+      <div class="cols">
+        <div>
+          <table class="data">
+            <caption>Potència dels components a plena càrrega</caption>
+            <tbody><tr><th scope="row">CPU</th><td>190 W</td></tr><tr><th scope="row">GPU</th><td>220 W</td></tr><tr><th scope="row">Placa, RAM i SSD</th><td>65 W</td></tr><tr><th scope="row">Ventiladors</th><td>25 W</td></tr><tr><th scope="row">Font actual</th><td>450 W nominals</td></tr></tbody>
+          </table>
+        </div>
+        <div>
+          <table class="data">
+            <caption>Temperatures i pressupost de l’activitat</caption>
+            <tbody><tr><th scope="row">Aire del taller</th><td>22 °C</td></tr><tr><th scope="row">CPU en joc</th><td>94 °C</td></tr><tr><th scope="row">Cost de les peces</th><td>125 €</td></tr><tr><th scope="row">Mà d’obra</th><td>35 €</td></tr><tr><th scope="row">Marge, descompte, IVA</th><td>30 %, 10 %, 21 %</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="exemple-title">
+      <h2 id="exemple-title">Exemple guiat abans de jugar</h2>
+      <ol>
+        <li>Sumem el consum: 190 + 220 + 65 + 25 = <strong>500 W</strong>.</li>
+        <li>Comparem amb la font actual: 500 − 450 = <strong>50 W</strong> per sobre de la potència nominal indicada.</li>
+        <li>Calculem el marge del 25 %: 500 × 1,25 = <strong>625 W</strong>. Al banc de proves triem una font de 650 W.</li>
+        <li>Calculem el salt tèrmic: 94 − 22 = <strong>72 °C</strong>.</li>
+      </ol>
+      <p class="note">La potència nominal de la font i el consum estimat dels components són magnituds diferents. El valor de 500 W és una estimació de plena càrrega del cas, no una mesura constant de consum.</p>
+    </section>
+
+    <section class="card game" id="joc" aria-labelledby="game-title">
+      <h2 id="game-title">Juguem el qüestionari</h2>
+      <p>Respon individualment. Després de cada pregunta, llegeix l’explicació i comenta amb el grup com s’obté el resultat. Cada resposta té entre 20 i 60 segons.</p>
+      <div id="game-intro"><button type="button" class="button" id="start">Comença les 17 preguntes</button></div>
+      <div id="game-active" hidden>
+        <div class="game-head"><span id="counter"></span><span id="score"></span><span id="timer" class="timer"></span></div>
+        <progress id="progress" max="17" value="0" aria-label="Progrés del qüestionari"></progress>
+        <h3 id="question"></h3>
+        <div class="answers" id="answers"></div>
+        <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+        <button type="button" class="button" id="next" hidden>Pregunta següent</button>
+      </div>
+      <div id="game-end" hidden>
+        <h3>Repte completat</h3>
+        <p id="result"></p>
+        <button type="button" class="button" id="restart">Torna a jugar</button>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="revisio-title">
+      <h2 id="revisio-title">Activitats després del joc</h2>
+      <ol>
+        <li><strong>Revisió:</strong> tria dues preguntes fallades o difícils. Escriu les dades, l’operació, la resposta amb unitat i una frase que expliqui l’error.</li>
+        <li><strong>Tiquet de sortida:</strong> si la base imposable és 177,75 €, calcula el total amb el 21 % d’IVA i explica per què l’IVA s’aplica després del descompte.</li>
+      </ol>
+      <p>Si no has fallat cap pregunta, explica per què 650 W és una opció més adequada que 550 W per als 500 W estimats del cas.</p>
+      <details>
+        <summary>Solucions i criteris de correcció</summary>
+        <p><strong>Tiquet:</strong> 177,75 × 1,21 = 215,0775 €, que s’arrodoneix a <strong>215,08 €</strong>. El descompte redueix primer el subtotal i dona la base sobre la qual es calcula l’IVA en aquest pressupost.</p>
+        <p><strong>Ampliació:</strong> 500 ÷ 650 × 100 ≈ 76,9 %, per sota del límit del 80 % del banc de proves. Amb 550 W, 500 ÷ 550 × 100 ≈ 90,9 %.</p>
+        <p><strong>Revisió:</strong> cada resposta ha d’incloure les dades correctes, una operació coherent, la unitat i una explicació del canvi de criteri. El joc és una activitat formativa; la puntuació per si sola no acredita l’aprenentatge.</p>
+      </details>
+    </section>
+  </main>
+  <footer>INS Pere Borrell · 2n d’FP Bàsica · Curs 2026–2027 · Rubén Pineda</footer>
+  <script src="questions.js"></script>
+  <script>
+    (() => {
+      const explanations = [
+        '190 + 220 + 65 + 25 = 500 W.',
+        '500 − 450 = 50 W per sobre de la potència nominal de la font actual.',
+        'El watt (W) expressa potència elèctrica.',
+        '500 × 1,25 = 625 W de potència mínima calculada amb aquest marge.',
+        '94 − 22 = 72 °C de salt tèrmic.',
+        '94 − 85 = 9 °C per sobre del límit recomanat en el cas.',
+        '500 ÷ 650 × 100 ≈ 76,9 %, que s’aproxima al 77 %.',
+        'El banc de proves de la classe demana no superar el 80 % de càrrega.',
+        'La prova de la classe exigeix una temperatura inferior a 70 °C.',
+        'El dissipador de torre, la pasta nova i tres ventiladors milloren la refrigeració simulada.',
+        'Una font al límit pot escalfar-se i tenir problemes davant dels pics de demanda.',
+        '125 × 1,30 = 162,50 € de preu de venda de les peces.',
+        '162,50 + 35 = 197,50 € de subtotal.',
+        '197,50 × 0,10 = 19,75 € de descompte.',
+        '197,50 − 19,75 = 177,75 € de base imposable.',
+        '177,75 × 1,21 = 215,0775 €, que s’arrodoneix a 215,08 €.',
+        'Si el salt tèrmic es manté, una pujada de 10 °C de l’aire implica 10 °C més a la CPU en el model del cas.'
+      ];
+      const $ = id => document.getElementById(id);
+      let index = 0, points = 0, timerId;
+      function stopTimer() { clearInterval(timerId); timerId = undefined; }
+      function answer(chosen) {
+        if (timerId === undefined) return;
+        stopTimer();
+        const q = questions[index];
+        [...$('answers').querySelectorAll('button')].forEach((button, i) => {
+          button.disabled = true;
+          if (i === q.correct) button.classList.add('correct');
+          if (i === chosen && i !== q.correct) button.classList.add('wrong');
+        });
+        if (chosen === q.correct) points++;
+        $('score').textContent = `${points} encerts`;
+        $('feedback').textContent = `${chosen === q.correct ? 'Correcte!' : `La resposta correcta és: ${q.answers[q.correct]}.`} ${explanations[index]}`;
+        $('next').hidden = false;
+        $('next').textContent = index === questions.length - 1 ? 'Veure el resultat' : 'Pregunta següent';
+        $('next').focus();
+      }
+      function render() {
+        const q = questions[index];
+        $('counter').textContent = `Pregunta ${index + 1} de ${questions.length}`;
+        $('score').textContent = `${points} encerts`;
+        $('progress').value = index;
+        $('question').textContent = q.question;
+        $('feedback').textContent = '';
+        $('next').hidden = true;
+        $('answers').replaceChildren();
+        q.answers.forEach((text, i) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'answer';
+          button.textContent = text;
+          button.addEventListener('click', () => answer(i));
+          $('answers').append(button);
+        });
+        let seconds = q.seconds;
+        $('timer').textContent = `${seconds} s`;
+        timerId = setInterval(() => {
+          seconds--;
+          $('timer').textContent = `${seconds} s`;
+          if (seconds <= 0) answer(-1);
+        }, 1000);
+      }
+      function start() {
+        stopTimer();
+        index = 0;
+        points = 0;
+        $('game-intro').hidden = true;
+        $('game-end').hidden = true;
+        $('game-active').hidden = false;
+        render();
+      }
+      $('start').addEventListener('click', start);
+      $('restart').addEventListener('click', start);
+      $('next').addEventListener('click', () => {
+        index++;
+        if (index === questions.length) {
+          $('game-active').hidden = true;
+          $('game-end').hidden = false;
+          $('result').textContent = `Has encertat ${points} de ${questions.length} preguntes. Revisa'n dues i explica què has après.`;
+        } else render();
+      });
+    })();
+  </script>
+</body>
+</html>
